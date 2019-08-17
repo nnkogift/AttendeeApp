@@ -20,6 +20,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+        'list-Atendees': (context) => EventAtendee(),
+        '/landing': (context) => LandingPage()
       },
     );
   }
