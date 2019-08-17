@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 
 
-Future<List<Attendee>> fetchAttendees(userId) async {
+Future<List<Attendee>> fetchAttendees(eventId) async {
   final response = await http.get(BASE_URL + EVENT_URL);
 
   if (response.statusCode == 200){

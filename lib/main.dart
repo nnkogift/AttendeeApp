@@ -1,9 +1,9 @@
-import 'package:event_attendance/signUp/signUpPage.dart';
+import 'package:event_attendance/authentication/signup/signUpPage.dart';
 import 'package:flutter/material.dart';
 
-import 'eventAtendee/eventAtendee.dart';
+import 'events/eventAttendee/eventAttendee.dart';
 import 'landing/landingPage.dart';
-import 'login/loginPage.dart';
+import 'authentication/login/loginPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
-        'list-Atendees': (context) => EventAtendee(),
+        'list-Atendees': (context) => EventAttendee(),
         '/landing': (context) => LandingPage()
       },
     );

@@ -1,4 +1,4 @@
-import 'package:event_attendance/signUp/signUpForm.dart';
+import 'package:event_attendance/authentication/signup/signUpForm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

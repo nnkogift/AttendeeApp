@@ -41,7 +41,8 @@ Future<User> createUser(User user) async {
     'fullName': user.fullName,
     'email': user.email,
     'phoneNo': user.phoneNo,
-    'position': user.position
+    'position': user.position,
+    'password': user.password
   };
 
   final response = await http.post(BASE_URL + EVENT_URL, body: json.encode(eventData));
@@ -83,5 +84,17 @@ Future<User> deleteUser(userId) async {
     throw Exception('Error Deleting User');
   }
 }
+
+//Future<User> loginUser(username, password) async {
+//  final Map<String, dynamic> credentials = {
+//    'username': username,
+//    'password': password
+//  };
+//
+//  final response = await http.post(BASE_URL + LOGIN_URL, body: json.encode(credentials));
+//
+//
+//  if (response.statusCode == 200)
+//}
 
 
