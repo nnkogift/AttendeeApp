@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "162789702449",
+    "firebase_url": "https://attendee-app-be68c.firebaseio.com",
+    "project_id": "attendee-app-be68c",
+    "storage_bucket": "attendee-app-be68c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162789702449:android:d203ecbda7e05609",
+        "android_client_info": {
+          "package_name": "flutterdev.event_attendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162789702449-es8lb0kf9utg94fhf4ukf8ftl3rcfok8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMopJRrQN9nrxE85MP9O5eXvPzm8ZQk3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162789702449-es8lb0kf9utg94fhf4ukf8ftl3rcfok8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

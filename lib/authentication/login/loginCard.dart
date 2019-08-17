@@ -14,7 +14,7 @@ class LoginFormState extends State<LoginForm>{
           padding: const EdgeInsets.only(top:30.0),
           child: Container(
             alignment: Alignment.center,
-            child: Text('Atendee', style: TextStyle(fontWeight: FontWeight.w900,
+            child: Text('Attendee', style: TextStyle(fontWeight: FontWeight.w900,
                 fontSize: 30,
                 color: Colors.white,
               shadows: [
