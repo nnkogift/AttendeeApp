@@ -14,13 +14,13 @@ class EventAttendeeState extends State<EventAttendee> {
 
   void mapAttendees(List<Attendee> obj){
     for(Attendee attendee in obj){
-        fetchUser(attendee.userId).then((value) => {_attendees.add(Text(value.fullName))}).catchError((error) => {});
+       _attendees.add(Text(attendee.fullName));
     }
   }
 
   void getAttendees(eventId) {
-    fetchAttendees(eventId).then((value) => {
-      this.mapAttendees(value)
+    fetchAttendees(eventId).then((value){
+      this.mapAttendees(value);
     }).catchError((error) => {});
   }
 

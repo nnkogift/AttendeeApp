@@ -1,9 +1,7 @@
-
-// ignore: non_constant_identifier_names
-final BASE_URL = 'https://flutter.hackaio.com';
-// ignore: non_constant_identifier_names
-final EVENT_URL = '';
-// ignore: non_constant_identifier_names
-final LOGIN_URL = '';
-// ignore: non_constant_identifier_names
-final SIGNUP_URL = '';
+const String USERS_URL = 'http://flutter.hackaio.com/ide/api/users';
+const String EVENTS_URL = 'http://flutter.hackaio.com/ide/api/events';
+const String ATTENDEES_URL = 'http://flutter.hackaio.com/ide/api/attendees';
+const Map<String, String> HEADER = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+};

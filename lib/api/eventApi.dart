@@ -8,12 +8,12 @@ import 'package:http/http.dart' as http;
 
 
 Future<List<Event>> fetchEvents(userId) async {
-  final response = await http.get(BASE_URL + EVENT_URL);
+  final response = await http.get(EVENTS_URL, headers: HEADER);
 
   if (response.statusCode == 200){
     List<Event> eventList = [];
-
     for(Map<String, dynamic> event in json.decode(response.body)){
+
       eventList.add(Event.fromJson(event));
     }
     return eventList;
@@ -24,7 +24,7 @@ Future<List<Event>> fetchEvents(userId) async {
 }
 
 Future<Event> fetchEvent(eventId) async {
-  final response = await http.get(BASE_URL + EVENT_URL);
+  final response = await http.get(EVENTS_URL, headers: HEADER);
 
   if (response.statusCode ==  200){
     return Event.fromJson(json.decode(response.body));
@@ -44,7 +44,7 @@ Future<Event> createEvent(Event event) async {
     'date': event.date
   };
 
-  final response = await http.post(BASE_URL + EVENT_URL, body: json.encode(eventData));
+  final response = await http.post(EVENTS_URL, body: json.encode(eventData), headers: HEADER);
 
   if(response.statusCode == 200){
        return Event.fromJson(json.decode(response.body));
@@ -63,7 +63,7 @@ Future<Event> updateEvent(Event event) async{
     'date': event.date
   };
 
-  final response = await http.put(BASE_URL + EVENT_URL + event.eventId, body: json.encode(eventData));
+  final response = await http.put(EVENTS_URL + event.eventId, body: json.encode(eventData), headers: HEADER);
 
   if (response.statusCode == 200){
       return  Event.fromJson(json.decode(response.body));
@@ -74,7 +74,7 @@ Future<Event> updateEvent(Event event) async{
 }
 
 Future<Event> deleteEvent(eventId) async {
-  final response = await http.delete(BASE_URL + EVENT_URL + eventId);
+  final response = await http.delete(EVENTS_URL + eventId, headers: HEADER);
 
   if (response.statusCode == 200){
     return Event.fromJson(json.decode(response.body));

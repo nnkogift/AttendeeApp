@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 
 Future<List<Attendee>> fetchAttendees(eventId) async {
-  final response = await http.get(BASE_URL + EVENT_URL);
+  final response = await http.get(ATTENDEES_URL);
 
   if (response.statusCode == 200){
     List<Attendee> attendeeList = [];
@@ -24,7 +24,7 @@ Future<List<Attendee>> fetchAttendees(eventId) async {
 }
 
 Future<Attendee> fetchAttendee(attendeeId) async {
-  final response = await http.get(BASE_URL + EVENT_URL);
+  final response = await http.get(ATTENDEES_URL);
 
   if (response.statusCode ==  200){
     return Attendee.fromJson(json.decode(response.body));
@@ -37,12 +37,13 @@ Future<Attendee> fetchAttendee(attendeeId) async {
 Future<Attendee> createAttendee(Attendee attendee) async {
 
   final Map<String, dynamic> attendeeData = {
-    'userId': attendee.userId,
+    'fullName': attendee.fullName,
     'eventId': attendee.eventId,
-    'status': attendee.status
+    'phoneNo': attendee.phoneNo,
+    'email': attendee.email
   };
 
-  final response = await http.post(BASE_URL + EVENT_URL, body: json.encode(attendeeData));
+  final response = await http.post(ATTENDEES_URL, body: json.encode(attendeeData));
 
   if(response.statusCode == 200){
     return Attendee.fromJson(json.decode(response.body));
@@ -54,12 +55,13 @@ Future<Attendee> createAttendee(Attendee attendee) async {
 
 Future<Attendee> updateAttendee(Attendee attendee) async{
   final Map<String, dynamic> attendeeData = {
-    'userId': attendee.userId,
+    'fullName': attendee.fullName,
     'eventId': attendee.eventId,
-    'status': attendee.status
+    'phoneNo': attendee.phoneNo,
+    'email': attendee.email
   };
 
-  final response = await http.put(BASE_URL + EVENT_URL + attendee.attendeeId, body: json.encode(attendeeData));
+  final response = await http.patch(ATTENDEES_URL + attendee.attendeeId, body: json.encode(attendeeData));
 
   if (response.statusCode == 200){
     return  Attendee.fromJson(json.decode(response.body));
@@ -70,7 +72,7 @@ Future<Attendee> updateAttendee(Attendee attendee) async{
 }
 
 Future<Attendee> deleteAttendee(attendeeId) async {
-  final response = await http.delete(BASE_URL + EVENT_URL + attendeeId);
+  final response = await http.delete(ATTENDEES_URL + attendeeId);
 
   if (response.statusCode == 200){
     return Attendee.fromJson(json.decode(response.body));

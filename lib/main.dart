@@ -1,4 +1,5 @@
 import 'package:event_attendance/authentication/signup/signUpPage.dart';
+import 'package:event_attendance/events/eventListPage.dart';
 import 'package:flutter/material.dart';
 
 import 'events/eventAttendee/eventAttendee.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
         'list-Atendees': (context) => EventAttendee(),
-        '/landing': (context) => LandingPage()
+        '/landing': (context) => LandingPage(),
+        EventsListPage.routeName: (context) => EventsListPage()
       },
     );
   }
