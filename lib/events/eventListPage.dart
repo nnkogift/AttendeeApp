@@ -22,10 +22,6 @@ class _EventsListPageState extends State<EventsListPage> {
 
 
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

@@ -1,5 +1,6 @@
 import 'package:event_attendance/api/eventApi.dart';
 import 'package:event_attendance/api/userApi.dart';
+import 'package:event_attendance/events/SingleEventPage.dart';
 import 'package:event_attendance/models/EventModel.dart';
 import 'package:event_attendance/models/UserModel.dart';
 import 'package:flutter/material.dart';
@@ -14,28 +15,12 @@ class EventList extends StatefulWidget {
 
 class _EventListState extends State<EventList> {
   List<Event> _events = [];
-
   bool _isEventsListLoading = true;
-
-  User _user;
 
   @override
   void initState() {
-    getUser().then((user) {
-      _user = user;
-      print(_user);
-      _getEvents(_user.userId);
-    });
-
+    _getEvents('5d5b22378b87bc0007ed0ee8');
     super.initState();
-  }
-
-  Future<User> getUser() async {
-    await fetchUser('5d5b22378b87bc0007ed0ee8').then((user) {
-      print('fetchUser' + user.userId);
-      return user;
-    });
-    return null;
   }
 
   void _getEvents(userId) {
@@ -57,8 +42,8 @@ class _EventListState extends State<EventList> {
       return Container(
         child: Center(
           child: Padding(
-            padding: EdgeInsets.only(top: 100.0),
-            child: SpinKitWanderingCubes(
+            padding: EdgeInsets.only(top: 60.0),
+            child: SpinKitWave(
               color: Color(0xFF00BCD4),
             ),
           ),
@@ -78,18 +63,34 @@ class _EventListState extends State<EventList> {
     } else {
       return Container(
         child: Center(
-          child:
-              ListView.builder(itemBuilder: (BuildContext context, int index) {
-            return Row(
-              children: <Widget>[
-                Text(_events[index].name),
-                Padding(
-                  padding: EdgeInsets.only(left: 40.0),
-                  child: Text(_events[index].date),
-                )
-              ],
-            );
-          }),
+          child: ListView.separated(
+            separatorBuilder: (context, index) {
+              return Divider(
+                color: Colors.grey,
+              );
+            },
+            itemCount: _events.length,
+            itemBuilder: (BuildContext context, int index) {
+              return
+                  ListTile(
+                    title: Row(
+                      children: <Widget>[
+                        Text(_events[index].name),
+                        Padding(
+                          padding: EdgeInsets.only(left: 150.0),
+                          child: Text(_events[index].date),
+                        )
+                      ],
+                    ),
+                    subtitle: Text(_events[index].description),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    leading: Icon(Icons.calendar_today),
+                    onTap:(){
+                      Navigator.pushNamed(context, SingleEventPage.routeName, arguments: { 'event': _events[index] });
+                    } ,
+                  );
+            },
+          ),
         ),
       );
     }

@@ -7,12 +7,16 @@ import 'package:http/http.dart' as http;
 
 
 
+
+
 Future<List<Event>> fetchEvents(userId) async {
-  final response = await http.get(EVENTS_URL, headers: HEADER);
+  final response = await http.get(EVENTS_URL + '?userId=' + userId, headers: HEADER);
 
   if (response.statusCode == 200){
+
+    print(response.body);
     List<Event> eventList = [];
-    for(Map<String, dynamic> event in json.decode(response.body)){
+    for(Map<String, dynamic> event in json.decode(response.body)['_embedded']['events']){
 
       eventList.add(Event.fromJson(event));
     }
