@@ -1,55 +1,57 @@
+import 'package:event_attendance/events/eventListPage.dart';
+import 'package:event_attendance/landing/LoadingWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
-class LandingPage extends StatefulWidget{
+class LandingPage extends StatefulWidget {
   LandingPageState createState() => LandingPageState();
 
+  static const String routeName = '/';
 }
 
-class LandingPageState extends State<LandingPage>{
+class LandingPageState extends State<LandingPage> {
+  final LocalStorage storage = LocalStorage('user');
+
+  Future<String> navigate() async{
+    String user = await storage.getItem('userToken');
+    print(user);
+    return user;
+
+  }
+
+
+  @override
+  void initState()  {
+    // TODO: implement initState
+    navigate().then((user){
+      if(user == null){
+        Future.delayed(Duration(seconds: 3),(){
+          Navigator.pushReplacementNamed(context, '/login');
+        });
+
+      } else{
+        Future.delayed(Duration(seconds: 3),(){
+          Navigator.pushReplacementNamed(context, EventsListPage.routeName);
+        });
+      }
+    });
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return  Scaffold(
-      appBar: AppBar(
-        title: Text('Atendee App',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 30),),
-      ),
+    return Scaffold(
         body: Column(
-
           children: <Widget>[
-            Container(
-        height: 30.0,
-        color: Colors.grey.withOpacity(0.7),
-            child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text('Recent Events'),
-              Text('Date'),
+            Padding(padding: EdgeInsets.only(top:150.0),),
+            FlutterLogo(size: 200,),
+            Text("Flutter Dev Community"),
+            Loading(),
+            Text('Please Wait...')
           ],
-        ),
-        ),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 30,
-                  itemBuilder: (BuildContext context, position){
-                    return Container(
-                      height: 40.0,
-                      child: Card(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Text('Udict Meating'),
-                            Text('Udict Meating'),
-
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-            ),
-          ],
-        )
-      );
+        ));
   }
-
 }

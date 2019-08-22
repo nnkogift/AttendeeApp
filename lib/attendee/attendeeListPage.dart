@@ -1,10 +1,13 @@
+import 'package:event_attendance/attendee/addAttendeePage.dart';
 import 'package:event_attendance/attendee/attendeeList.dart';
 import 'package:flutter/material.dart';
 
 class AttendeeListPage extends StatefulWidget {
-  AttendeeListPage({Key key}) : super(key: key);
+  AttendeeListPage({Key key, this.eventId}) : super(key: key);
 
   static const String routeName = "/attendees";
+
+  final String eventId;
 
   final String title = 'Attendees';
 
@@ -22,7 +25,7 @@ class _State extends State<AttendeeListPage> {
       ),
       body: new Container(
         child: Center(
-          child: AttendeeList('123456'),
+          child: AttendeeList(widget.eventId),
         ),
       ),
       floatingActionButton: new FloatingActionButton(
@@ -34,5 +37,11 @@ class _State extends State<AttendeeListPage> {
     );
   }
 
-  void _onFloatingActionButtonPressed() {}
+  void _onFloatingActionButtonPressed() {
+    Navigator.pushNamed(context, AddAttendeePage.routeName, arguments: {'eventId': widget.eventId}).then((value){
+      setState(() {
+
+      });
+    });
+  }
 }

@@ -15,6 +15,9 @@ class AttendeeList extends StatefulWidget {
 
 class _AttendeeListState extends State<AttendeeList> {
 
+
+
+
   List<Attendee> _attendees = [];
   bool _isAttendanceListLoading = true;
 

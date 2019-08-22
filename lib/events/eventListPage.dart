@@ -1,13 +1,17 @@
 
 
 import 'package:event_attendance/api/userApi.dart';
+import 'package:event_attendance/events/addEventPage.dart';
 import 'package:event_attendance/models/UserModel.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
 import 'eventList.dart';
 
 class EventsListPage extends StatefulWidget {
-  EventsListPage({Key key }) : super(key: key);
+  final String userId;
+
+  EventsListPage({Key key, this.userId }) : super(key: key);
 
   static const String routeName = "/eventsListPage";
 
@@ -19,7 +23,7 @@ class EventsListPage extends StatefulWidget {
 }
 
 class _EventsListPageState extends State<EventsListPage> {
-
+  LocalStorage storage = LocalStorage('user');
 
 
   @override
@@ -29,7 +33,7 @@ class _EventsListPageState extends State<EventsListPage> {
         title: new Text(widget.title),
         backgroundColor: const Color(0xFF00BCD4),
       ),
-      body: EventList(),
+      body: EventList(userId: widget.userId,),
       floatingActionButton: new FloatingActionButton(
         onPressed: _onFloatingActionButtonPressed,
         tooltip: 'Add New Event',
@@ -40,5 +44,6 @@ class _EventsListPageState extends State<EventsListPage> {
   }
 
   void _onFloatingActionButtonPressed() {
+    Navigator.pushNamed(context, AddEventPage.routeName);
   }
 }

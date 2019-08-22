@@ -10,13 +10,13 @@ import 'authApi.dart';
 
 
 
-Future<List<User>> fetchUsers({userId}) async {
+Future<List<User>> fetchUsers() async {
   final response = await http.get(USERS_URL, headers: HEADER);
 
   if (response.statusCode == 200){
     List<User> users = [];
 
-    for(Map<String, dynamic> user in json.decode(response.body)){
+    for(Map<String, dynamic> user in json.decode(response.body)['_embedded']['users']){
       users.add(User.fromJson(user));
     }
     return users;
@@ -26,10 +26,13 @@ Future<List<User>> fetchUsers({userId}) async {
   }
 }
 
-Future<User> fetchUser(userId) async {
-  final response = await http.get(USERS_URL + '/' + userId, headers: HEADER);
+Future<User>fetchUser(userId) async {
+  final response = await http.get(USERS_URL + 'search/findUserByUserId?userId=' + userId, headers: HEADER);
+  print(USERS_URL + 'search/findUserByUserId?userId=' + userId);
 
   if (response.statusCode ==  200){
+    print(json.decode(response.body));
+    print(User.fromJson(json.decode(response.body)).userId);
     return User.fromJson(json.decode(response.body));
   }
   else{

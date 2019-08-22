@@ -29,6 +29,9 @@ dependencies:
   firebase_auth: ^0.14.0+2
   flutter_spinkit: ^4.0.0
   loading: ^1.0.1
+  datetime_picker_formfield: ^0.4.2
+  random_string: ^1.1.0
+  localstorage: ^2.0.0
 
 
 dev_dependencies:

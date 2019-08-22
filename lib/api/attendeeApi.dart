@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 Future<List<Attendee>> fetchAttendees(eventId) async {
   final response =
-      await http.get(ATTENDEES_URL + "?eventId=" + eventId, headers: HEADER);
+      await http.get(ATTENDEES_URL + "search/findAllByEventId?eventId=" + eventId, headers: HEADER);
 
   if (response.statusCode == 200) {
     List<Attendee> attendeeList = [];
@@ -22,7 +22,7 @@ Future<List<Attendee>> fetchAttendees(eventId) async {
 }
 
 Future<Attendee> fetchAttendee(attendeeId) async {
-  final response = await http.get(ATTENDEES_URL + attendeeId);
+  final response = await http.get(ATTENDEES_URL + attendeeId, headers: HEADER);
 
   if (response.statusCode == 200) {
     return Attendee.fromJson(json.decode(response.body));
@@ -36,11 +36,12 @@ Future<Attendee> createAttendee(Attendee attendee) async {
     'fullName': attendee.fullName,
     'eventId': attendee.eventId,
     'phoneNo': attendee.phoneNo,
-    'email': attendee.email
+    'email': attendee.email,
+    'attendeeId': attendee.attendeeId
   };
 
   final response =
-      await http.post(ATTENDEES_URL, body: json.encode(attendeeData));
+      await http.post(ATTENDEES_URL, body: json.encode(attendeeData), headers: HEADER);
 
   if (response.statusCode == 200) {
     return Attendee.fromJson(json.decode(response.body));
@@ -58,7 +59,7 @@ Future<Attendee> updateAttendee(Attendee attendee) async {
   };
 
   final response = await http.patch(ATTENDEES_URL + attendee.attendeeId,
-      body: json.encode(attendeeData));
+      body: json.encode(attendeeData), headers: HEADER);
 
   if (response.statusCode == 200) {
     return Attendee.fromJson(json.decode(response.body));
@@ -68,7 +69,7 @@ Future<Attendee> updateAttendee(Attendee attendee) async {
 }
 
 Future<Attendee> deleteAttendee(attendeeId) async {
-  final response = await http.delete(ATTENDEES_URL + attendeeId);
+  final response = await http.delete(ATTENDEES_URL + attendeeId, headers: HEADER);
 
   if (response.statusCode == 200) {
     return Attendee.fromJson(json.decode(response.body));

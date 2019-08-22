@@ -1,9 +1,10 @@
+import 'package:event_attendance/attendee/addAttendeePage.dart';
 import 'package:event_attendance/attendee/attendeeListPage.dart';
 import 'package:event_attendance/authentication/signup/signUpPage.dart';
 import 'package:event_attendance/events/SingleEventPage.dart';
+import 'package:event_attendance/events/addEventPage.dart';
 import 'package:event_attendance/events/eventListPage.dart';
 import 'package:flutter/material.dart';
-
 import 'events/eventAttendee/eventAttendee.dart';
 import 'landing/landingPage.dart';
 import 'authentication/login/loginPage.dart';
@@ -20,15 +21,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: LandingPage.routeName,
       routes: {
-        '/': (context) => LoginPage(),
+        '/login': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
-        'list-Atendees': (context) => EventAttendee(),
+        '/list-Atendees': (context) => EventAttendee(),
         '/landing': (context) => LandingPage(),
         EventsListPage.routeName: (context) => EventsListPage(),
         AttendeeListPage.routeName: (context) => AttendeeListPage(),
-        SingleEventPage.routeName: (context) => SingleEventPage()
+        SingleEventPage.routeName: (context) => SingleEventPage(),
+        AddEventPage.routeName: (context) => AddEventPage(),
+        AddAttendeePage.routeName: (context)=> AddAttendeePage(),
+        LandingPage.routeName: (context)=> LandingPage()
       },
     );
   }

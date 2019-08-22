@@ -1,9 +1,11 @@
 import 'package:event_attendance/api/authApi.dart';
 import 'package:event_attendance/events/eventListPage.dart';
 import 'package:event_attendance/landing/LoadingWidget.dart';
+import 'package:event_attendance/models/UserModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:localstorage/localstorage.dart';
 
 class LoginForm extends StatefulWidget {
   LoginFormState createState() => LoginFormState();
@@ -14,6 +16,13 @@ class LoginFormState extends State<LoginForm> {
   final _passwordController = TextEditingController();
 
   bool _isPageLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,23 +144,18 @@ class LoginFormState extends State<LoginForm> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5.0)),
                                 child: RaisedButton(
-                                  onPressed: () {
+                                  onPressed: (){
                                     setState(() {
                                       _isPageLoading = true;
                                     });
-
-                                    //Login the user, navigate to Event list
-                                    handleSignInWithEmail(
-                                            email: _usernameController.text,
-                                            password: _passwordController.text)
-                                        .then((user) {
-                                      print(user);
-                                      Navigator.pushReplacementNamed(
-                                          context, EventsListPage.routeName,
-                                          arguments: user);
-                                    }).catchError((error) {
-                                      print(error);
+                                     loginUser().then((user) {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => EventsListPage(
+                                                  userId: user.userId)));
                                     });
+                                    //Login the user, navigate to Event list
                                   },
                                   child: Text('LOGIN'),
                                   elevation: 10.0,
@@ -185,5 +189,10 @@ class LoginFormState extends State<LoginForm> {
         ],
       );
     }
+  }
+
+  Future<User> loginUser() async{
+   return await handleSignInWithEmail(
+            email: _usernameController.text, password: _passwordController.text);
   }
 }

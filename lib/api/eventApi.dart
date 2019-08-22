@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 
 Future<List<Event>> fetchEvents(userId) async {
-  final response = await http.get(EVENTS_URL + '?userId=' + userId, headers: HEADER);
+  final response = await http.get(EVENTS_URL + 'search/findAllByUserId?userId=' + userId, headers: HEADER);
 
   if (response.statusCode == 200){
 
@@ -41,11 +41,11 @@ Future<Event> fetchEvent(eventId) async {
 Future<Event> createEvent(Event event) async {
 
   final Map<String, dynamic> eventData = {
-    'eventId': event.eventId,
     'userId': event.userId,
     'name': event.name,
-    'decription': event.description,
-    'date': event.date
+    'description': event.description,
+    'date': event.date,
+    'eventId': event.eventId
   };
 
   final response = await http.post(EVENTS_URL, body: json.encode(eventData), headers: HEADER);
